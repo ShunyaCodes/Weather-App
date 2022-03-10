@@ -1,4 +1,5 @@
 # Weather App:
+Weather App built with Flutter and BLoC state Management.
 
 ### Screenshots:
 Home Page             |  Search Page           |        Settings Page
