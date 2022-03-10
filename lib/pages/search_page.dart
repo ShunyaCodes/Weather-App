@@ -29,7 +29,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
+        title: Text('Search',
+        style: TextStyle(fontFamily: 'Axiforma'),),
       ),
       body: Form(
         key: _formKey,
@@ -41,10 +42,12 @@ class _SearchPageState extends State<SearchPage> {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: TextFormField(
                 autofocus: true,
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(
+                  fontFamily: 'Axiforma',
+                  fontSize: 18.0),
                 decoration: InputDecoration(
                   labelText: 'City name',
-                  hintText: 'more than 2 characters',
+                  hintText: 'More than 2 characters',
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(),
                 ),
@@ -63,8 +66,9 @@ class _SearchPageState extends State<SearchPage> {
             ElevatedButton(
               onPressed: _submit,
               child: Text(
-                "How's weather?",
+                "Check Weather",
                 style: TextStyle(
+                  fontFamily: 'Axiforma',
                   fontSize: 20.0,
                 ),
               ),
