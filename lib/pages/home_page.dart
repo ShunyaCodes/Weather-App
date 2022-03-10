@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 
 import '../constants/constants.dart';
 import '../blocs/blocs.dart';
@@ -21,7 +22,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather'),
+        title: Text('Weather Home',
+        style: TextStyle(fontFamily: 'Axiforma'),),
+        backgroundColor: Colors.purple.shade700,
+        elevation: 1,
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -53,7 +57,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: _showWeather(),
+      body: Container(child: _showWeather(),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.purple.shade700, Colors.deepPurpleAccent.shade700],),
+  ),
+      ),
     );
   }
 
@@ -84,12 +95,13 @@ class _HomePageState extends State<HomePage> {
       },
       builder: (context, state) {
         if (state.status == WeatherStatus.initial) {
-          return Center(
-            child: Text(
-              'Select a city',
-              style: TextStyle(fontSize: 20.0),
-            ),
-          );
+          return  Center(
+              child: Text(
+                'Select a city',
+                style: TextStyle(fontSize: 20.0),
+              ),
+            );
+          
         }
 
         if (state.status == WeatherStatus.loading) {
@@ -101,74 +113,123 @@ class _HomePageState extends State<HomePage> {
         if (state.status == WeatherStatus.error && state.weather.title == '') {
           return Center(
             child: Text(
-              'Select a city',
-              style: TextStyle(fontSize: 20.0),
+               'Select a city',
+                style: TextStyle(
+                fontFamily: 'Axiforma',
+                fontSize: 20.0,
+                color: Colors.white),
             ),
           );
         }
 
-        return ListView(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 6,
-            ),
-            Text(
-              state.weather.title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 40.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              TimeOfDay.fromDateTime(state.weather.lastUpdated).format(context),
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18.0),
-            ),
-            SizedBox(height: 60.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+        return  ListView(
+            children: [
+              
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:15,vertical: 100),
+              child: GlassmorphicContainer(
+                  
+              height: 410,
+              width: 400,
+              borderRadius: 25,
+              blur: 50,
+              border: 2,
+              linearGradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                               Color(0xFFffffff).withOpacity(0.4),
+                               Color(0xFFFFFFFF).withOpacity(0.05),
+                              ],
+                              stops: [
+                                0.1,
+                                1,
+                              ]),
+                          borderGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                             const Color(0xFFffffff).withOpacity(0.5),
+                              const Color((0xFFFFFFFF)).withOpacity(0.5),
+                            ],
+                          ),
+              child:Column(
+                  children:[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 13,
+                ),
                 Text(
-                  showTemperature(state.weather.theTemp),
+                  state.weather.title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 30.0,
+                    fontFamily: 'Axiforma',
+                    fontSize: 40.0,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
-                SizedBox(width: 20.0),
-                Column(
+                SizedBox(height: 10.0),
+                Text(
+                  TimeOfDay.fromDateTime(state.weather.lastUpdated).format(context),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20.0,
+                  fontFamily: 'Axiforma',),
+                ),
+                SizedBox(height: 40.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      showTemperature(state.weather.maxTemp),
-                      style: TextStyle(fontSize: 16.0),
+                      showTemperature(state.weather.theTemp),
+                      style: TextStyle(
+                        fontFamily: 'Axiforma',
+                        fontSize: 35.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    SizedBox(height: 10.0),
-                    Text(
-                      showTemperature(state.weather.minTemp),
-                      style: TextStyle(fontSize: 16.0),
+                    SizedBox(width: 20.0),
+                    Column(
+                      children: [
+                        Text(
+                          showTemperature(state.weather.maxTemp),
+                          style: TextStyle(
+                            fontFamily: 'Axiforma',
+                            fontSize: 18.0),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          showTemperature(state.weather.minTemp),
+                          style: TextStyle(
+                            fontFamily: 'Axiforma',
+                          fontSize: 18.0),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(height: 40.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Spacer(),
-                showIcon(state.weather.weatherStateAbbr),
-                SizedBox(width: 20.0),
-                Text(
-                  state.weather.weatherStateName,
-                  style: TextStyle(fontSize: 32.0),
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Spacer(),
+                    showIcon(state.weather.weatherStateAbbr),
+                    SizedBox(width: 20.0),
+                    Text(
+                      state.weather.weatherStateName,
+                      style: TextStyle(fontFamily: 'Axiforma',
+                      fontSize: 30.0),
+                    ),
+                    Spacer(),
+                  ],
                 ),
-                Spacer(),
               ],
+                ),
+                ),
             ),
-          ],
-        );
+            ],
+          );
+        
       },
     );
   }
