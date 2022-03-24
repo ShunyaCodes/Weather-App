@@ -1,5 +1,5 @@
 # Weather App:
-⚡️Built App UI with Flutter and implemented glassmorphis
+⚡️Built App UI with Flutter and implemented glassmorphism
 .\
 ⚡️Implemented weather API to show weather details with BLoC state Management 
 
