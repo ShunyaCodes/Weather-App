@@ -1,7 +1,7 @@
 # Weather App:
 ⚡️Implemented App UI and glassmorphism with Flutter
 \
-⚡️Implemented weather API to show weather details with BLoC state Management\
+⚡️Implemented weather API to show weather details with BLoC state Management
 
 ### How to Run:
 To run the project, first run command ` flutter clean ` and then ` flutter pub get ` to avoid errors.\
